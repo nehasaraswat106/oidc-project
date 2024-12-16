@@ -1,28 +1,35 @@
 name: AWS example workflow
+
 on:
   push
+
 env:
-  BUCKET_NAME : "oidc-bucket2"
-  AWS_REGION : "us-east-1"
-# permission can be added at job level or workflow level
+  BUCKET_NAME: "oidc-bucket2"
+  AWS_REGION: "us-east-1"
+
 permissions:
-  id-token: write   # This is required for requesting the JWT
-  contents: read    # This is required for actions/checkout
+  id-token: write   # Required for requesting the OIDC JWT token
+  contents: read    # Required for actions/checkout
+
 jobs:
   S3PackageUpload:
     runs-on: ubuntu-latest
+
     steps:
       - name: Git clone the repository
         uses: actions/checkout@v4
-        
-      - name: configure aws credentials
-        uses: aws-actions/configure-aws-credentials@e3dd6a429d7300a6a4c196c26e071d42e0343502
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v3
         with:
           role-to-assume: "arn:aws:iam::149536498544:role/role-1"
           role-session-name: "samplerolesession"
           aws-region: ${{ env.AWS_REGION }}
-      
-      # Upload a file to AWS s3
-      - name: Copy text file to s3
+
+      - name: Verify AWS credentials
+        run: aws sts get-caller-identity
+
+      - name: Copy text file to S3
         run: |
-          aws s3 cp ./oidc.txt s3://${{ env.BUCKET_NAME }}/
+          echo "This is a sample file" > oidc.txt
+          aws s3 cp ./oidc.txt s3://${{ env.BUCKET_NAME }}/oidc.txt
