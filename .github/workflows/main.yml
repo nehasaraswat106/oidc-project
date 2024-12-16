@@ -22,7 +22,7 @@ jobs:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v3
         with:
-          role-to-assume: "arn:aws:iam::149536498544:role/role-1"
+          role-to-assume: "arn:aws:iam::149536498544:role/neha-role"
           role-session-name: "samplerolesession"
           aws-region: ${{ env.AWS_REGION }}
 
