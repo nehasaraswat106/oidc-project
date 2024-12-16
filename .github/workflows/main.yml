@@ -5,7 +5,7 @@ on:
     # Required inputs
     inputs:
       BUCKET_NAME:
-        description: "bucket name"
+        description: "oidc-bucket2"
         type: string
         required: true
       AWS_REGION:
