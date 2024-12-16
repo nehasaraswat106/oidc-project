@@ -4,8 +4,8 @@ on:
   workflow_call:
     # Required inputs
     inputs:
-      BUCKET_NAME:
-        description: "oidc-bucket2"
+      BUCKET_NAME:"oidc-bucket2"
+        description:"bucket-name"
         type: string
         required: true
       AWS_REGION:
