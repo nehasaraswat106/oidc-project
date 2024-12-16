@@ -2,7 +2,7 @@ name: AWS example workflow
 on:
   push
 env:
-  BUCKET_NAME : "oidc-bucket"
+  BUCKET_NAME : "oidc-bucket2"
   AWS_REGION : "us-east-1"
 # permission can be added at job level or workflow level
 permissions:
